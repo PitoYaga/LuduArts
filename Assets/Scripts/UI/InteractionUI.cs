@@ -26,6 +26,7 @@ public class InteractionUI : MonoBehaviour
     {
         interactionText.SetText(interactionName);
         itemNameText.SetText(itemName);
+        ShowHoverCrosshair(true);
     }
 
     public void UpdateHoldingBar(float percent)
@@ -34,10 +35,10 @@ public class InteractionUI : MonoBehaviour
     }
 
 
-    public void ShorHoverCrosshair()
+    public void ShowHoverCrosshair(bool showDefault)
     {
-        crosshairDefault.enabled = false;
-        crosshairHover.enabled = true;
+        crosshairDefault.enabled = !showDefault;
+        crosshairHover.enabled = showDefault;
     }
 
 
@@ -46,8 +47,7 @@ public class InteractionUI : MonoBehaviour
         holdingBar.fillAmount = 0;
         interactionText.SetText("");
         itemNameText.SetText("");
-        crosshairDefault.enabled = true;
-        crosshairHover.enabled = false;
+        ShowHoverCrosshair(false);
     }
 
 

@@ -3,11 +3,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Input Data
     PlayerInput m_PlayerInput;
     InputAction m_MoveAction;
     InputAction m_CameraAction;
     InputAction m_InteractionAction;
     InputAction m_InventoryAction;
+    #endregion
 
     [Header("Movement Settings")]
     public float m_WalkSpeed = 5;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Interaction Settings")]
     public float m_InteractionDistance = 150;
+    bool m_HoldingKey;
 
     InteractionUI interactionUI;
 
@@ -49,6 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         CameraMovement();
+        InteractionRay();
     }
 
 
@@ -88,12 +92,13 @@ public class PlayerController : MonoBehaviour
 
     void OnInteractionStarted(InputAction.CallbackContext ctx) // Interaction input pressed
     {
+
         InteractionRay();
     }
 
     void OnInteractionCanceled(InputAction.CallbackContext ctx) // Interaction input released
     {
-        
+        m_HoldingKey = false;
     }
 
     #endregion
@@ -122,11 +127,22 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, m_InteractionDistance))
         {
             var interactable = hit.collider.GetComponentInParent<IInteractable>();
-            if (interactable != null)
+
+            if(m_HoldingKey)
             {
                 interactable.OnInteraction(gameObject);
             }
-
+            else
+            {
+                if (interactable != null)
+                {
+                    interactionUI.UpdateInteractionText(interactable.InteractionName, interactable.ItemName);
+                }
+                else
+                {
+                    interactionUI.ResetInteractionWindow();
+                }
+            }
         }
     }
 

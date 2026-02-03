@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [Header("Interaction Settings")]
     public float m_InteractionDistance = 150;
     bool m_HoldingKey;
+    float m_InputHoldTime;
 
     InteractionUI interactionUI;
 
@@ -91,12 +92,15 @@ public class PlayerController : MonoBehaviour
 
     void OnInteractionStarted(InputAction.CallbackContext ctx) // Interaction input pressed
     {
+        m_InputHoldTime = 0;
         m_HoldingKey = true;
     }
 
     void OnInteractionCanceled(InputAction.CallbackContext ctx) // Interaction input released
     {
+        m_InputHoldTime = 0;
         m_HoldingKey = false;
+        interactionUI.UpdateHoldingBar(0);
     }
 
     #endregion
@@ -133,22 +137,49 @@ public class PlayerController : MonoBehaviour
 
             if (interactable != null)
             {
-                if (m_HoldingKey)
+                if(interactable.IsInteractable)
                 {
-                    interactable.OnInteraction(gameObject);
+                    if (m_HoldingKey)
+                    {
+                        if (interactable.HoldInteract)
+                        {
+                            m_InputHoldTime += Time.deltaTime;
+                            interactionUI.UpdateHoldingBar(m_InputHoldTime / interactable.HoldDuration);
+
+                            if (m_InputHoldTime >= interactable.HoldDuration)
+                            {
+                                m_InputHoldTime = 0;
+                                m_HoldingKey = false;
+                                interactionUI.UpdateHoldingBar(0);
+                                interactable.OnInteraction(gameObject);
+                            }
+                        }
+                        else
+                        {
+                            m_HoldingKey = false;
+                            interactable.OnInteraction(gameObject);
+                        }
+                    }
+                    else
+                    {
+                        interactionUI.UpdateInteractionText(interactable.InteractionName, interactable.ItemName);
+                    }
                 }
                 else
                 {
-                    interactionUI.UpdateInteractionText(interactable.InteractionName, interactable.ItemName);
+                    m_InputHoldTime = 0;
+                    interactionUI.ResetInteractionWindow();
                 }
             }
-            else
+            else // Close interaction widget if hit item has no interface.
             {
+                m_InputHoldTime = 0;
                 interactionUI.ResetInteractionWindow();
             }
         }
-        else
+        else // Close interaction window if there is no hit item.
         {
+            m_InputHoldTime = 0;
             interactionUI.ResetInteractionWindow();
         }
     }

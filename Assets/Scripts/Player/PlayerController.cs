@@ -131,24 +131,25 @@ public class PlayerController : MonoBehaviour
         {
             var interactable = hit.collider.GetComponentInParent<IInteractable>();
 
-            if(m_HoldingKey)
+            if (interactable != null)
             {
-                if (interactable != null)
+                if (m_HoldingKey)
                 {
                     interactable.OnInteraction(gameObject);
+                }
+                else
+                {
+                    interactionUI.UpdateInteractionText(interactable.InteractionName, interactable.ItemName);
                 }
             }
             else
             {
-                if (interactable != null)
-                {
-                    interactionUI.UpdateInteractionText(interactable.InteractionName, interactable.ItemName);
-                }
-                else
-                {
-                    interactionUI.ResetInteractionWindow();
-                }
+                interactionUI.ResetInteractionWindow();
             }
+        }
+        else
+        {
+            interactionUI.ResetInteractionWindow();
         }
     }
 

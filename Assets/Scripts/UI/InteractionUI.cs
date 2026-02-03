@@ -10,7 +10,7 @@ public class InteractionUI : MonoBehaviour
     public Image holdingBar;
     public TextMeshProUGUI interactionText;
     public TextMeshProUGUI itemNameText;
-    public TextMeshProUGUI warningText;
+
     public Image crosshairDefault;
     public Image crosshairHover;
 
@@ -18,8 +18,6 @@ public class InteractionUI : MonoBehaviour
     private void Start()
     {
         ResetInteractionWindow();
-        warningText.text = "";
-        warningText.enabled = false;
     }
 
     public void UpdateInteractionText(string interactionName, string itemName)
@@ -51,16 +49,9 @@ public class InteractionUI : MonoBehaviour
     }
 
 
-    public void ShowWarningText(string text)
-    {
-        StartCoroutine(ToggleWarningText(text));
+    public void ShowWarningText(string warningText)
+    { 
+        GetComponent<WarningTextUI>().ShowWarningText(warningText); 
     }
-
-    IEnumerator ToggleWarningText(string text)
-    {
-        warningText.text = text;
-        warningText.enabled = true;
-        yield return new WaitForSeconds(2);
-        warningText.enabled = false;
-    }
+    
 }

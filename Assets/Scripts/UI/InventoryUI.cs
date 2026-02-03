@@ -39,4 +39,10 @@ public class InventoryUI : MonoBehaviour
         m_InventoryOpen = !m_InventoryOpen;
         m_inventoryWindow.SetActive(m_InventoryOpen);
     }
+
+
+    public void ShowWarningText(string warningText)
+    {
+        GetComponent<WarningTextUI>().ShowWarningText(warningText);
+    }
 }

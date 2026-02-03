@@ -40,4 +40,8 @@ public class PlayerInventory : MonoBehaviour, I_PlayerInventory
         m_inventoryUI = GameObject.FindGameObjectWithTag("HUD").GetComponent<InventoryUI>();
     }
 
+    public void ShowWarningText(string warningText)
+    {
+        m_inventoryUI.ShowWarningText(warningText);
+    }
 }

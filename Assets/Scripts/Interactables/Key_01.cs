@@ -17,7 +17,7 @@ public class Key_01 : MonoBehaviour, IInteractable
 
     #endregion
 
-   
+    public E_Keys m_KeyType;
 
     void Start()
     {
@@ -32,7 +32,12 @@ public class Key_01 : MonoBehaviour, IInteractable
 
     public void OnInteraction(GameObject interactor)
     {
-        Debug.Log("Key picked up");
+        var playerInventory = interactor.GetComponentInParent<I_PlayerInventory>();
+
+        if (playerInventory != null) 
+        {
+            playerInventory.AddKey(m_KeyType);
+        }
         Destroy(gameObject);
     }
 

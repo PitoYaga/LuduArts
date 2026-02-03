@@ -37,8 +37,6 @@ public class PlayerController : MonoBehaviour
 
         m_InteractionAction.started += OnInteractionStarted;
         m_InteractionAction.canceled += OnInteractionCanceled;
-
-        m_InventoryAction.started += ToggleInventory;
     }
 
 
@@ -53,6 +51,7 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
         CameraMovement();
         InteractionRay();
+        ToggleInventory();
     }
 
 
@@ -92,8 +91,7 @@ public class PlayerController : MonoBehaviour
 
     void OnInteractionStarted(InputAction.CallbackContext ctx) // Interaction input pressed
     {
-
-        InteractionRay();
+        m_HoldingKey = true;
     }
 
     void OnInteractionCanceled(InputAction.CallbackContext ctx) // Interaction input released
@@ -107,9 +105,14 @@ public class PlayerController : MonoBehaviour
     #region Inventory Key
 
 
-    void ToggleInventory(InputAction.CallbackContext ctx)
+    void ToggleInventory()
     {
-        Debug.Log("Toggle Inventory");
+        if (m_InventoryAction.triggered)
+        {
+            InventoryUI inventoryUI = gameObject.GetComponent<PlayerInventory>().m_inventoryUI;
+            inventoryUI.ToggleInventory();
+        }
+        
     }
 
 
@@ -130,7 +133,10 @@ public class PlayerController : MonoBehaviour
 
             if(m_HoldingKey)
             {
-                interactable.OnInteraction(gameObject);
+                if (interactable != null)
+                {
+                    interactable.OnInteraction(gameObject);
+                }
             }
             else
             {

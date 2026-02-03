@@ -21,10 +21,10 @@ public class PlayerController : MonoBehaviour
     [Header("Interaction Settings")]
     public float m_InteractionDistance = 150;
 
+    InteractionUI interactionUI;
 
 
-
-    void Start()
+    private void Awake()
     {
         m_PlayerInput = GetComponent<PlayerInput>();
         m_MoveAction = m_PlayerInput.actions.FindAction("Movement");
@@ -36,6 +36,12 @@ public class PlayerController : MonoBehaviour
         m_InteractionAction.canceled += OnInteractionCanceled;
 
         m_InventoryAction.started += ToggleInventory;
+    }
+
+
+    void Start()
+    {
+        interactionUI = GameObject.FindGameObjectWithTag("HUD").GetComponent<InteractionUI>();
     }
 
 

@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     public float m_CameraClamp = 70;
     float verticalRotation;
 
+    [Header("Interaction Settings")]
+    public float m_InteractionDistance = 150;
+
 
 
 
@@ -27,8 +30,12 @@ public class PlayerController : MonoBehaviour
         m_MoveAction = m_PlayerInput.actions.FindAction("Movement");
         m_CameraAction = m_PlayerInput.actions.FindAction("Camera");
         m_InteractionAction = m_PlayerInput.actions.FindAction("Interaction");
+        m_InventoryAction = m_PlayerInput.actions.FindAction("ToggleInventory");
+
         m_InteractionAction.started += OnInteractionStarted;
         m_InteractionAction.canceled += OnInteractionCanceled;
+
+        m_InventoryAction.started += ToggleInventory;
     }
 
 
@@ -70,13 +77,52 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+
+    #region Interaction Key
+
     void OnInteractionStarted(InputAction.CallbackContext ctx) // Interaction input pressed
     {
-       
+        InteractionRay();
     }
 
     void OnInteractionCanceled(InputAction.CallbackContext ctx) // Interaction input released
     {
         
     }
+
+    #endregion
+
+
+    #region Inventory Key
+
+
+    void ToggleInventory(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Toggle Inventory");
+    }
+
+
+    #endregion
+
+
+
+    #region Interaction Ray Settings
+
+    void InteractionRay()
+    {
+        //Debug.Log("Interaction Ray");
+        Ray ray = new Ray(m_Camera.transform.position, m_Camera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, m_InteractionDistance))
+        {
+            var interactable = hit.collider.GetComponentInParent<IInteractable>();
+            if (interactable != null)
+            {
+                interactable.OnInteraction(gameObject);
+            }
+
+        }
+    }
+
+    #endregion
 }

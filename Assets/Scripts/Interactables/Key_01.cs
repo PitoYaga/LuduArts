@@ -19,16 +19,14 @@ public class Key_01 : MonoBehaviour, IInteractable
 
     public E_Keys m_KeyType;
 
-    void Start()
+    AudioSource audioSource;
+
+
+    private void Awake()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
-    
-    void Update()
-    {
-        
-    }
 
     public void OnInteraction(GameObject interactor)
     {
@@ -37,6 +35,15 @@ public class Key_01 : MonoBehaviour, IInteractable
         if (playerInventory != null) 
         {
             playerInventory.AddKey(m_KeyType);
+        }
+
+        if(audioSource)
+        {
+            audioSource.PlayOneShot(m_InteractionData.InteractionSound);
+        }
+        if(m_InteractionData.InteractionParticle)
+        {
+            Instantiate(m_InteractionData.InteractionParticle, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
     }

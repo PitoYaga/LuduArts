@@ -7,6 +7,9 @@ public class WarningTextUI : MonoBehaviour
     public TextMeshProUGUI warningText;
 
 
+    /// <summary>
+    /// Reset on begining
+    /// </summary>
     private void Start()
     {
         warningText.text = "";

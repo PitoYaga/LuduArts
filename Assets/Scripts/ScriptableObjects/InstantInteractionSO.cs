@@ -5,4 +5,6 @@ public abstract class InstantInteractionSO : ScriptableObject
     public bool IsInteracaable;
     public string ItemName;
     public string InteractionName;
+    public AudioClip InteractionSound;
+    public ParticleSystem InteractionParticle;
 }

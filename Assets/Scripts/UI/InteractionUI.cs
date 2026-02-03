@@ -20,6 +20,12 @@ public class InteractionUI : MonoBehaviour
         ResetInteractionWindow();
     }
 
+
+    /// <summary>
+    /// Setup interaction window. Get item name and interaction type
+    /// </summary>
+    /// <param name="interactionName"></param>
+    /// <param name="itemName"></param>
     public void UpdateInteractionText(string interactionName, string itemName)
     {
         interactionText.SetText(interactionName);
@@ -27,12 +33,21 @@ public class InteractionUI : MonoBehaviour
         ShowHoverCrosshair(true);
     }
 
+
+    /// <summary>
+    /// Holding inpur progress bar
+    /// </summary>
+    /// <param name="percent"></param>
     public void UpdateHoldingBar(float percent)
     {
         holdingBar.fillAmount = percent;
     }
 
 
+    /// <summary>
+    /// Change crosshair type
+    /// </summary>
+    /// <param name="showDefault"></param>
     public void ShowHoverCrosshair(bool showDefault)
     {
         crosshairDefault.enabled = !showDefault;
@@ -40,6 +55,9 @@ public class InteractionUI : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Clear interaction window
+    /// </summary>
     public void ResetInteractionWindow()
     {
         holdingBar.fillAmount = 0;
@@ -49,6 +67,10 @@ public class InteractionUI : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Show warning text on the screen
+    /// </summary>
+    /// <param name="warningText"></param>
     public void ShowWarningText(string warningText)
     { 
         GetComponent<WarningTextUI>().ShowWarningText(warningText); 

@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Door_01 : MonoBehaviour, IInteractable
 {
@@ -30,9 +31,13 @@ public class Door_01 : MonoBehaviour, IInteractable
     private Quaternion m_ClosedRotation;
     private Quaternion m_OpenRotation;
 
+    AudioSource audioSource;
+
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+
         if (m_DoorPivot == null)
         {
             m_DoorPivot = transform;
@@ -50,10 +55,6 @@ public class Door_01 : MonoBehaviour, IInteractable
     }
 
 
-    void Update()
-    {
-
-    }
 
     public void OnInteraction(GameObject interactor)
     {
@@ -90,9 +91,21 @@ public class Door_01 : MonoBehaviour, IInteractable
         StopAllCoroutines();
         StartCoroutine(RotateDoor());
         m_InteractionData.InteractionName = m_IsOpen ? "Close" : "Open";
+        if (audioSource)
+        {
+            audioSource.PlayOneShot(m_InteractionData.InteractionSound);
+        }
+        if (m_InteractionData.InteractionParticle)
+        {
+            Instantiate(m_InteractionData.InteractionParticle, transform.position, Quaternion.identity);
+        }
     }
 
 
+    /// <summary>
+    /// Door open and close animation
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator RotateDoor()
     {
         Quaternion targetRotation = m_IsOpen ? m_OpenRotation : m_ClosedRotation;

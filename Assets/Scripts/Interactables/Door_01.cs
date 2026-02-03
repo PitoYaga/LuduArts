@@ -66,7 +66,7 @@ public class Door_01 : MonoBehaviour, IInteractable
             {
                 if (playerInventory.HasKey(m_CorrectKey))
                 {
-                    m_Locked = false;
+                    
                     ToggleDoor();
                 }
                 else
@@ -85,11 +85,14 @@ public class Door_01 : MonoBehaviour, IInteractable
     }
 
 
-    private void ToggleDoor()
+    public void ToggleDoor()
     {
+        m_Locked = false;
         m_IsOpen = !m_IsOpen;
+
         StopAllCoroutines();
         StartCoroutine(RotateDoor());
+
         m_InteractionData.InteractionName = m_IsOpen ? "Close" : "Open";
         if (audioSource)
         {

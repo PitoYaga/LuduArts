@@ -12,9 +12,7 @@ public class PlayerController : MonoBehaviour
     public InputAction m_InteractionAction;
     public InputActionReference m_InventoryAction;
 
-    
     #endregion
-
 
 
     [Header("Movement Settings")]
@@ -41,11 +39,8 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         m_InventoryAction.action.Enable();
-
         m_InventoryAction.action.started += ToggleInventory;
     }
-
-
 
 
     /// <summary>
@@ -54,10 +49,12 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         m_InventoryAction.action.started -= ToggleInventory;
-
         m_InventoryAction.action.Disable();
     }
     #endregion
+
+
+    #region BeginPlay Setup
 
     private void Awake()
     {
@@ -76,6 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         interactionUI = GameObject.FindGameObjectWithTag("HUD").GetComponent<InteractionUI>();
     }
+    #endregion
 
 
     private void Update()
@@ -121,14 +119,14 @@ public class PlayerController : MonoBehaviour
     #region Interaction Key
 
   
-    private void OnInteractStarted(InputAction.CallbackContext context)
+    private void OnInteractStarted(InputAction.CallbackContext context) // Interaction key pressed
     {
         m_InputHoldTime = 0;
         m_HoldingKey = true;
         
     }
 
-    private void OnInteractCanceled(InputAction.CallbackContext context)
+    private void OnInteractCanceled(InputAction.CallbackContext context) // Interaction key released
     {
         m_InputHoldTime = 0;
         m_HoldingKey = false;
@@ -143,7 +141,6 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Open and close inventory
     /// </summary>
-
     private void ToggleInventory(InputAction.CallbackContext context)
     {
         InventoryUI inventoryUI = gameObject.GetComponent<PlayerInventory>().m_inventoryUI;
@@ -152,7 +149,6 @@ public class PlayerController : MonoBehaviour
 
 
     #endregion
-
 
 
     #region Interaction Ray Settings

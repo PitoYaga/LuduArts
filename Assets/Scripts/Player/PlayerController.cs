@@ -139,6 +139,8 @@ public class PlayerController : MonoBehaviour
             {
                 if(interactable.IsInteractable)
                 {
+                    interactionUI.UpdateInteractionText(interactable.InteractionName, interactable.ItemName);
+
                     if (m_HoldingKey)
                     {
                         if (interactable.HoldInteract)
@@ -159,10 +161,6 @@ public class PlayerController : MonoBehaviour
                             m_HoldingKey = false;
                             interactable.OnInteraction(gameObject);
                         }
-                    }
-                    else
-                    {
-                        interactionUI.UpdateInteractionText(interactable.InteractionName, interactable.ItemName);
                     }
                 }
                 else

@@ -19,6 +19,7 @@ public class WarningTextUI : MonoBehaviour
 
     public void ShowWarningText(string text)
     {
+        StopAllCoroutines();
         StartCoroutine(ToggleWarningText(text));
     }
 

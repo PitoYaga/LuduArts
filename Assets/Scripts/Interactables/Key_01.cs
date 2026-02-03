@@ -8,7 +8,7 @@ public class Key_01 : MonoBehaviour, IInteractable
 
     #region Interface Values
 
-    public bool IsInteractable => true;
+    bool IInteractable.IsInteractable { get => m_InteractionData.IsInteracaable; set => m_InteractionData.IsInteracaable = value; }
     public bool HoldInteract => false;
     public float HoldDuration => 0;
     public bool MultipleUse => false;

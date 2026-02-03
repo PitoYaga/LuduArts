@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612c392da89fe2e40845852747f30089, type: 3}
   m_Name: BlueKey
   m_EditorClassIdentifier: 
+  IsInteracaable: 1
   ItemName: Blue Key
   InteractionName: Loot

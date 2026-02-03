@@ -10,7 +10,7 @@ public class Door_01 : MonoBehaviour, IInteractable
 
     #region Interface Values
 
-    public bool IsInteractable => true;
+    bool IInteractable.IsInteractable { get => m_InteractionData.IsInteractable; set => m_InteractionData.IsInteractable = value; }
     public bool HoldInteract => false;
     public float HoldDuration => 0;
     public bool MultipleUse => true;

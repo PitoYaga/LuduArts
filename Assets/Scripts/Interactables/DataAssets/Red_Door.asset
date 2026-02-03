@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612c392da89fe2e40845852747f30089, type: 3}
-  m_Name: RedKey
+  m_Script: {fileID: 11500000, guid: b8d606060b6fbbb4bb30556c8cffd5c2, type: 3}
+  m_Name: Red_Door
   m_EditorClassIdentifier: 
-  IsInteracaable: 1
-  ItemName: Red Key
-  InteractionName: Loot
+  IsInteractable: 1
+  ItemName: Red Door
+  InteractionName: Open

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d606060b6fbbb4bb30556c8cffd5c2, type: 3}
   m_Name: Switch_01
   m_EditorClassIdentifier: 
+  IsInteractable: 1
   ItemName: Switch
-  InteractionName: 
+  InteractionName: Click

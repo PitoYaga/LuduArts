@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6468e5300a36b498a4a5e9c48a6595, type: 3}
   m_Name: Chest_01
   m_EditorClassIdentifier: 
+  IsInteractable: 1
   ItemName: Chest
   InteractionName: Hold To Loot
   HoldDuration: 2

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    bool IsInteractable { get; }
+    bool IsInteractable { get; set; }
     bool HoldInteract { get; }
     float HoldDuration { get; }
     bool MultipleUse { get; }

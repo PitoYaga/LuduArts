@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 3172196894191078059}
   m_Layer: 0
   m_Name: P_Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,11 +187,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c3712b3017d68429c2ac3fb33ef47c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InteractionAction:
+    m_Name: Interaction
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: fa1b86c5-2dc2-4f9e-a8e3-57497d030136
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 756e5af6-b384-45b1-b490-338983d66524
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interaction
+      m_Flags: 0
+    m_Flags: 0
+  m_InventoryAction: {fileID: -2019782559673576312, guid: a0755f293b36c6540bcdb6ba8283c01c, type: 3}
   m_WalkSpeed: 5
   m_Camera: {fileID: 7568749658980055052}
   m_LookSensivity: 2
   m_CameraClamp: 70
-  m_InteractionDistance: 150
+  m_InteractionDistance: 2.5
 --- !u!114 &3270011914421516680
 MonoBehaviour:
   m_ObjectHideFlags: 0

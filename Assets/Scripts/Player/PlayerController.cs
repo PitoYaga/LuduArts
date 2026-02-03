@@ -1,15 +1,21 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     #region Input Data
+
     PlayerInput m_PlayerInput;
     InputAction m_MoveAction;
     InputAction m_CameraAction;
-    InputAction m_InteractionAction;
-    InputAction m_InventoryAction;
+    public InputAction m_InteractionAction;
+    public InputActionReference m_InventoryAction;
+
+    
     #endregion
+
+
 
     [Header("Movement Settings")]
     public float m_WalkSpeed = 5;
@@ -28,17 +34,42 @@ public class PlayerController : MonoBehaviour
     InteractionUI interactionUI;
 
 
+    #region Setup Inputs
+    /// <summary>
+    /// Enable Inputs
+    /// </summary>
+    private void OnEnable()
+    {
+        m_InventoryAction.action.Enable();
+
+        m_InventoryAction.action.started += ToggleInventory;
+    }
+
+
+
+
+    /// <summary>
+    /// Disable Inputs
+    /// </summary>
+    private void OnDisable()
+    {
+        m_InventoryAction.action.started -= ToggleInventory;
+
+        m_InventoryAction.action.Disable();
+    }
+    #endregion
+
     private void Awake()
     {
         m_PlayerInput = GetComponent<PlayerInput>();
         m_MoveAction = m_PlayerInput.actions.FindAction("Movement");
         m_CameraAction = m_PlayerInput.actions.FindAction("Camera");
         m_InteractionAction = m_PlayerInput.actions.FindAction("Interaction");
-        m_InventoryAction = m_PlayerInput.actions.FindAction("ToggleInventory");
 
-        m_InteractionAction.started += OnInteractionStarted;
-        m_InteractionAction.canceled += OnInteractionCanceled;
+        m_InteractionAction.started += OnInteractStarted;
+        m_InteractionAction.canceled += OnInteractCanceled;
     }
+
 
 
     void Start()
@@ -52,7 +83,6 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
         CameraMovement();
         InteractionRay();
-        ToggleInventory();
     }
 
 
@@ -90,13 +120,15 @@ public class PlayerController : MonoBehaviour
 
     #region Interaction Key
 
-    void OnInteractionStarted(InputAction.CallbackContext ctx) // Interaction input pressed
+  
+    private void OnInteractStarted(InputAction.CallbackContext context)
     {
         m_InputHoldTime = 0;
         m_HoldingKey = true;
+        
     }
 
-    void OnInteractionCanceled(InputAction.CallbackContext ctx) // Interaction input released
+    private void OnInteractCanceled(InputAction.CallbackContext context)
     {
         m_InputHoldTime = 0;
         m_HoldingKey = false;
@@ -108,15 +140,14 @@ public class PlayerController : MonoBehaviour
 
     #region Inventory Key
 
+    /// <summary>
+    /// Open and close inventory
+    /// </summary>
 
-    void ToggleInventory()
+    private void ToggleInventory(InputAction.CallbackContext context)
     {
-        if (m_InventoryAction.triggered)
-        {
-            InventoryUI inventoryUI = gameObject.GetComponent<PlayerInventory>().m_inventoryUI;
-            inventoryUI.ToggleInventory();
-        }
-        
+        InventoryUI inventoryUI = gameObject.GetComponent<PlayerInventory>().m_inventoryUI;
+        inventoryUI.ToggleInventory();
     }
 
 
@@ -180,6 +211,10 @@ public class PlayerController : MonoBehaviour
             m_InputHoldTime = 0;
             interactionUI.ResetInteractionWindow();
         }
+
+        //Debug.DrawRay(ray.origin, ray.direction * m_InteractionDistance, Color.green);
+
+
     }
 
     #endregion

@@ -1341,6 +1341,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4950152708236424926, guid: 9d3f312348ef6844d99d00204444adb0, type: 3}
+      propertyPath: interaction.m_Name
+      value: Interaction
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950152708236424926, guid: 9d3f312348ef6844d99d00204444adb0, type: 3}
+      propertyPath: m_InteractionAction.m_Name
+      value: Interaction
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950152708236424926, guid: 9d3f312348ef6844d99d00204444adb0, type: 3}
+      propertyPath: interaction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950152708236424926, guid: 9d3f312348ef6844d99d00204444adb0, type: 3}
+      propertyPath: interaction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 10a8b0ef-1fd8-458a-a219-52de9ab7fe90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950152708236424926, guid: 9d3f312348ef6844d99d00204444adb0, type: 3}
+      propertyPath: m_InteractionAction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950152708236424926, guid: 9d3f312348ef6844d99d00204444adb0, type: 3}
+      propertyPath: interaction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/e
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950152708236424926, guid: 9d3f312348ef6844d99d00204444adb0, type: 3}
+      propertyPath: interaction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Interaction
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950152708236424926, guid: 9d3f312348ef6844d99d00204444adb0, type: 3}
+      propertyPath: m_InteractionAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 756e5af6-b384-45b1-b490-338983d66524
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950152708236424926, guid: 9d3f312348ef6844d99d00204444adb0, type: 3}
+      propertyPath: m_InteractionAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/e
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950152708236424926, guid: 9d3f312348ef6844d99d00204444adb0, type: 3}
+      propertyPath: m_InteractionAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Interaction
+      objectReference: {fileID: 0}
     - target: {fileID: 4991603171645287719, guid: 9d3f312348ef6844d99d00204444adb0, type: 3}
       propertyPath: m_Name
       value: P_Player
